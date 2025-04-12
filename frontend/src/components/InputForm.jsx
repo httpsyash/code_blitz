@@ -82,9 +82,9 @@ const InputForm = () => {
     setError('');
     setResult(null);
     console.log("Sending data:", formData);
-    const INputurl = process.env.Optimize_url
+    const optimizeurl = process.env.Optimize_url
     try {
-      const response = await axios.post('http://localhost:5000/api/cost/estimate', formData);
+      const response = await axios.post(`${optimizeurl}/api/cost/estimate`, formData);
       setResult(response.data);
       console.log("Response from backend:", response.data);
     } catch (err) {
