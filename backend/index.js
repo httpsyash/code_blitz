@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
  
 
-
+console.log
 app.use("/api/cost", costRoutes);
 app.use('/api', gptRoutes);
 
