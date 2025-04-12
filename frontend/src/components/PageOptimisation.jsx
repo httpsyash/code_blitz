@@ -52,7 +52,7 @@ const PageOptimisation = () => {
       };
 
       setLoading(true);
-      const optimizeurl = process.env.Optimize_url
+      const optimizeurl = import.meta.env.VITE_Optimize_url;
       axios.post(`${optimizeurl}/api/optimize`, dataToSend)
         .then(res => {
           setOptimisedData(res.data.suggestions);
@@ -70,7 +70,7 @@ const PageOptimisation = () => {
     if (!element) return;
   
     const htmlContent = element.outerHTML;
-    const INputurl = process.env.Optimize_url;
+    const optimizeurl = import.meta.env.VITE_Optimize_url;
     try {
       const response = await axios.post(
         `${optimizeurl}/api/generate-pdf`,
