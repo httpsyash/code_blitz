@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="BuildEstimate - A comprehensive construction cost estimator for your projects" />
+    <meta name="theme-color" content="#5a67d8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗️</text></svg>">
+    <title>BuildEstimate | Construction Cost Estimator</title>
+    <!-- Add html2pdf.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f7fafc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-in-out, background-color 0.3s ease;
+      }
+      
+      html[data-theme="dark"] #preloader {
+        background-color: #1a202c;
+      }
+      
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 4px solid rgba(90, 103, 216, 0.1);
+        border-top-color: #5a67d8;
+        animation: spin 1s infinite linear;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .fade-out {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+    
+    <div id="root"></div>
+    <script type="module" src="./src/index.jsx"></script>
+    
+    <script>
+      // Check for theme preference before page loads
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else if (prefersDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const preloader = document.getElementById('preloader');
+          preloader.classList.add('fade-out');
+          
+          setTimeout(function() {
+            preloader.style.display = 'none';
+          }, 500);
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
